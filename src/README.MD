@@ -43,3 +43,12 @@ I did not implement MFA. Since I got to this project late, I did not have the ti
 the minimal requirements of the assignment allowed. 
 
 images for the testing are in the docx file in this repository, json_responses_login_reg.docx
+
+AI was used extensively, especially in generating a lot of the boilerplate code. It was also used to assist in validating
+that all proper packages were imported, as I was troubleshooting various issues. I had some trouble understanding
+the utilization of jwt, and setting up the Spring Security to allow unauthenticated traffic to pass through. Finally, Postman
+has a good tool for generating mass numbers of json requests for endpoint testing. Some of the issues I had with utilizing AI
+was odd formatting errors, and incorrect calling of packages in the code, specifically with the argon2 spring packages.
+While others occurred, this one immediately comes to mind. using the springboot debug, I was able to validate that the jwt
+was being properly authenticated. I also was able to confirm that modifying the tokens did cause them to be rejected. I was
+wary especially due to the warning, that the jwt would not see proper authentication. 
