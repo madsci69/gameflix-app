@@ -49,4 +49,4 @@ jobs:
 
       - name: Build Docker image
 
-        run: docker build -t gameflix-app
+        run: docker build -t gameflix-app .
