@@ -65,7 +65,7 @@ jobs:
           upload-artifact: false
 
       - name: Install Trivy
-        uses: aquasecurity/setup-trivy@v0.2.0
+        uses: aquasecurity/setup-trivy@v0.76.0
 
       - name: Scan SBOM with Trivy
         run: | 
