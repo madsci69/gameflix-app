@@ -20,6 +20,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
+
 
 
     steps:
@@ -50,3 +54,35 @@ jobs:
       - name: Build Docker image
 
         run: docker build -t gameflix-app .
+
+      - name: Generate SBOM with Syft
+
+        uses: anchore/sbom-action@v0
+        with:
+          image: gameflix-app
+          format: cyclonedx-json
+          output-file: gameflix-sbom.cdx.json
+          upload-artifact: false
+
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.0
+
+      - name: Scan SBOM with Trivy
+        run: | 
+          trivy sbom \
+          --severity CRITICAL \
+          --exit-code 1 \
+          --format table \
+          --output trivy-results.txt \
+          gameflix-sbom.cdx.json
+
+      - name: Upload Security Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gameflix-security-reports
+          path: |
+            gameflix-sbom.cdx.json
+            trivy-results.txt
+          if-no-files-found: warn
+          retention-days: 60
